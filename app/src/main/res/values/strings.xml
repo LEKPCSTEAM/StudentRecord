@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">StudentRecord</string>
+    <string name="student_records_mis">STUDENT RECORDS MIS</string>
+    <string name="regno">regno</string>
+</resources>
