@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
@@ -78,18 +80,25 @@ public class MainActivity extends AppCompatActivity {
     void showAddEdit(Student edit){
         LayoutInflater inf = LayoutInflater.from(this);
         android.view.View v = inf.inflate(R.layout.dialog_add_edit,null,false);
-        EditText etRegno=v.findViewById(R.id.etRegno);
-        EditText etFullname=v.findViewById(R.id.etFullname);
-        EditText etGender=v.findViewById(R.id.etGender);
-        EditText etProgram=v.findViewById(R.id.etProgram);
-        EditText etCollege=v.findViewById(R.id.etCollege);
-        EditText etDate=v.findViewById(R.id.etDate);
+
+        EditText etRegno   = v.findViewById(R.id.etRegno);
+        EditText etFullname= v.findViewById(R.id.etFullname);
+        Spinner  spGender  = v.findViewById(R.id.spGender); // ✅ Spinner
+        EditText etProgram = v.findViewById(R.id.etProgram);
+        EditText etCollege = v.findViewById(R.id.etCollege);
+        EditText etDate    = v.findViewById(R.id.etDate);
+
+        // set dropdown gender
+        ArrayAdapter<String> genderAdapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_dropdown_item,
+                new String[]{"male","female"});
+        spGender.setAdapter(genderAdapter);
 
         etDate.setFocusable(false);
         etDate.setClickable(true);
         etDate.setOnClickListener(view -> {
             MaterialDatePicker<Long> picker = MaterialDatePicker.Builder.datePicker()
-                    .setTitleText("เลือกวันที่รับของ")
+                    .setTitleText("เลือกวันที่")
                     .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
                     .build();
             picker.addOnPositiveButtonClickListener(selection -> {
@@ -105,21 +114,22 @@ public class MainActivity extends AppCompatActivity {
         if(edit!=null){
             etRegno.setText(edit.regno); etRegno.setEnabled(false);
             etFullname.setText(edit.fullname);
-            etGender.setText(edit.gender);
+            spGender.setSelection(edit.gender.equalsIgnoreCase("female")?1:0); // ✅ set Spinner
             etProgram.setText(edit.program);
             etCollege.setText(edit.college);
             etDate.setText(edit.date);
         }
+
         new AlertDialog.Builder(this)
                 .setTitle(edit==null?"Create":"Edit")
                 .setView(v)
                 .setPositiveButton("Save",(d,w)->{
-                    String regno=etRegno.getText().toString().trim();
-                    String fullname=etFullname.getText().toString().trim();
-                    String gender=etGender.getText().toString().trim();
-                    String program=etProgram.getText().toString().trim();
-                    String college=etCollege.getText().toString().trim();
-                    String date=etDate.getText().toString().trim();
+                    String regno   = etRegno.getText().toString().trim();
+                    String fullname= etFullname.getText().toString().trim();
+                    String gender  = spGender.getSelectedItem().toString(); // ✅ ดึงจาก Spinner
+                    String program = etProgram.getText().toString().trim();
+                    String college = etCollege.getText().toString().trim();
+                    String date    = etDate.getText().toString().trim();
                     if(edit==null) create(regno,fullname,gender,program,college,date);
                     else update(regno,fullname,gender,program,college,date);
                 })

@@ -1,7 +1,6 @@
 package com.example.studentrecord;
 
 public class Model {
-    //firstly define instance variables
 
     String regno;
     String fullname;
@@ -9,8 +8,6 @@ public class Model {
     String program;
     String college;
     String date;
-
-    //then create an constructor that will be called by MainActivity.java
 
     public Model(String regno, String fullname, String gender, String program, String college, String date) {
         this.regno = regno;
@@ -20,9 +17,6 @@ public class Model {
         this.college = college;
         this.date = date;
     }
-
-    //then create getter and setter methods
-
 
     public String getRegno() {
         return regno;

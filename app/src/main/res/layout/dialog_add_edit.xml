@@ -13,8 +13,10 @@
 
             <EditText android:id="@+id/etRegno" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="รหัสลงทะเบียน"/>
             <EditText android:id="@+id/etFullname" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="ชื่อ"/>
-            <EditText android:id="@+id/etGender" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="เพศ"/>
-            <EditText android:id="@+id/etProgram" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="สาขา"/>
+            <Spinner
+                android:id="@+id/spGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>            <EditText android:id="@+id/etProgram" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="สาขา"/>
             <EditText android:id="@+id/etCollege" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="คณะ"/>
             <EditText android:id="@+id/etDate" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="วันที่ลงทะเบียน e.g. 2022-03-20"/>
         </LinearLayout>
